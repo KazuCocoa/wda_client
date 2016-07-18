@@ -1,3 +1,3 @@
-module WdaClient
+class WdaClient
   VERSION = "0.1.0"
 end
