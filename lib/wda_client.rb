@@ -6,14 +6,14 @@ class WdaClient
   include ::WdaClient::Status
   include ::WdaClient::Sessions
 
-  attr_accessor :session_id, :capability
+  attr_accessor :session_id, :capabilities
   attr_reader :base_url
 
   BASE_URL = 'http://localhost:8100'
 
   def initialize(caps:, base_url: BASE_URL)
     valid_caps(caps)
-    @capability = caps
+    @capabilities = caps
     @base_url = base_url
     @session_id = nil
   end
