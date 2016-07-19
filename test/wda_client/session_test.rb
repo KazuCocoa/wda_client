@@ -2,28 +2,24 @@ require "test_helper"
 require 'webmock/minitest'
 require 'json'
 
-class WdaClient::StatusTest < Minitest::Test
-  def test_get_status
+class WdaClient::SessionTest < Minitest::Test
+  def test_get_session
     base_host = 'localhost:8100'
 
     json =<<-EXPECTED_JSON
-  {
+{
   "value" : {
-    "state" : "success",
-    "os" : {
-      "name" : "iPhone OS",
-      "version" : "9.3"
-    },
-    "ios" : {
-      "simulatorVersion" : "9.3"
-    },
-    "build" : {
-      "time" : "Jul 18 2016 17:28:56"
+    "sessionId" : "26FA8CEA-9D59-4EB1-8B19-84AFD7307936",
+    "capabilities" : {
+      "device" : "iphone",
+      "browserName" : "My App",
+      "sdkVersion" : "9.3",
+      "CFBundleIdentifier" : "com.kazucocoa"
     }
   },
-  "sessionId" : null,
+  "sessionId" : "26FA8CEA-9D59-4EB1-8B19-84AFD7307936",
   "status" : 0
-  }
+}
     EXPECTED_JSON
 
     caps =<<-CAPS
@@ -35,12 +31,12 @@ class WdaClient::StatusTest < Minitest::Test
 }
     CAPS
 
-    stub_request(:get, "#{base_host}/status")
+    stub_request(:post, "#{base_host}/session")
       .with(headers:{ 'Content-Type' => 'application/json' })
       .to_return(body: json)
 
     client = ::WdaClient.new caps: caps
-    res_json_body = client.get_status
+    res_json_body = client.install
 
     assert_equal JSON.parse(json), res_json_body
   end

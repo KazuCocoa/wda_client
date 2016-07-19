@@ -6,7 +6,16 @@ class WdaClientTest < Minitest::Test
   end
 
   def test_generate_url
-    client = ::WdaClient.new caps: 'dummy caps'
+    caps =<<-CAPS
+{
+  "desiredCapabilities": {
+    "bundleId": "com.kazucocoa",
+    "app": "path/to/myApp.app"
+  }
+}
+    CAPS
+
+    client = ::WdaClient.new caps: caps
     uri = client.generate_uri(url_path: '/status')
     assert_equal 'http://localhost:8100/status', uri.to_s
   end

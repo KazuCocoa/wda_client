@@ -1,8 +1,10 @@
 require 'wda_client/version'
 require 'wda_client/status'
+require 'wda_client/sessions'
 
 class WdaClient
   include ::WdaClient::Status
+  include ::WdaClient::Sessions
 
   attr_accessor :session, :capability
   attr_reader :base_url
@@ -10,6 +12,7 @@ class WdaClient
   BASE_URL = 'http://localhost:8100'
 
   def initialize(caps:, base_url: BASE_URL)
+    valid_caps(caps)
     @capability = caps
     @base_url = base_url
   end
@@ -28,5 +31,12 @@ class WdaClient
     req['Content-Type'] = 'application/json'
 
     req
+  end
+
+  def valid_caps(caps)
+    parsed_caps = JSON.parse(caps)
+    raise ArgumentError, "should caps has desiredCapabilities" if parsed_caps["desiredCapabilities"].nil?
+    raise ArgumentError, "should caps has bundleId" if parsed_caps["desiredCapabilities"]["bundleId"].nil?
+    raise ArgumentError, "should caps has app" if parsed_caps["desiredCapabilities"]["app"].nil?
   end
 end
