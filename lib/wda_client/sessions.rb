@@ -11,7 +11,10 @@ class WdaClient
         http.request(req)
       end
 
-      JSON.parse res.body
+      result = JSON.parse(res.body)
+      @session_id = result["sessionId"] || result["value"]["sessionId"]
+
+      result
     end
   end
 end

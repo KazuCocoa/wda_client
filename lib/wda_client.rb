@@ -6,7 +6,7 @@ class WdaClient
   include ::WdaClient::Status
   include ::WdaClient::Sessions
 
-  attr_accessor :session, :capability
+  attr_accessor :session_id, :capability
   attr_reader :base_url
 
   BASE_URL = 'http://localhost:8100'
@@ -15,6 +15,7 @@ class WdaClient
     valid_caps(caps)
     @capability = caps
     @base_url = base_url
+    @session_id = nil
   end
 
   def generate_uri(url_path:)

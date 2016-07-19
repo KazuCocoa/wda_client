@@ -47,5 +47,6 @@ class WdaClientTest < Minitest::Test
     client = ::WdaClient.new caps: caps
     uri = client.generate_uri(url_path: '/status')
     assert_equal 'http://localhost:8100/status', uri.to_s
+    assert_equal nil, client.session_id
   end
 end
