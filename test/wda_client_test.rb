@@ -5,6 +5,35 @@ class WdaClientTest < Minitest::Test
     refute_nil ::WdaClient::VERSION
   end
 
+  def test_failed_with_blank_caps
+    caps =<<-CAPS
+{
+}
+    CAPS
+    assert_raises(ArgumentError, "should caps has desiredCapabilities") { ::WdaClient.new(caps: caps) }
+  end
+
+  def test_failed_caps_without_bundleId
+    caps =<<-CAPS
+{
+  "desiredCapabilities": {
+  }
+}
+    CAPS
+    assert_raises(ArgumentError, "should caps has bundleId") { ::WdaClient.new(caps: caps) }
+  end
+
+  def test_failed_caps_without_app
+    caps =<<-CAPS
+{
+  "desiredCapabilities": {
+    "bundleId": "com.kazucocoa"
+  }
+}
+    CAPS
+    assert_raises(ArgumentError, "should caps has app") { ::WdaClient.new(caps: caps) }
+  end
+
   def test_generate_url
     caps =<<-CAPS
 {
