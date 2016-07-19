@@ -10,7 +10,7 @@ class WdaClientTest < Minitest::Test
 {
 }
     CAPS
-    assert_raises(ArgumentError, "should caps has desiredCapabilities") { ::WdaClient.new(caps: caps) }
+    assert_raises(ArgumentError, "should caps has desiredCapabilities") { ::WdaClient.new(desired_capabilities: caps) }
   end
 
   def test_failed_caps_without_bundleId
@@ -20,7 +20,7 @@ class WdaClientTest < Minitest::Test
   }
 }
     CAPS
-    assert_raises(ArgumentError, "should caps has bundleId") { ::WdaClient.new(caps: caps) }
+    assert_raises(ArgumentError, "should caps has bundleId") { ::WdaClient.new(desired_capabilities: caps) }
   end
 
   def test_failed_caps_without_app
@@ -31,7 +31,7 @@ class WdaClientTest < Minitest::Test
   }
 }
     CAPS
-    assert_raises(ArgumentError, "should caps has app") { ::WdaClient.new(caps: caps) }
+    assert_raises(ArgumentError, "should caps has app") { ::WdaClient.new(desired_capabilities: caps) }
   end
 
   def test_generate_url
@@ -44,9 +44,11 @@ class WdaClientTest < Minitest::Test
 }
     CAPS
 
-    client = ::WdaClient.new caps: caps
+    client = ::WdaClient.new desired_capabilities: caps
     uri = client.generate_uri(url_path: '/status')
     assert_equal 'http://localhost:8100/status', uri.to_s
+    assert_equal JSON.parse(caps), client.desired_capabilities
     assert_equal nil, client.session_id
+    assert_equal nil, client.capabilities
   end
 end

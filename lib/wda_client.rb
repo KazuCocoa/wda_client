@@ -6,15 +6,15 @@ class WdaClient
   include ::WdaClient::Status
   include ::WdaClient::Sessions
 
-  attr_accessor :session_id, :capabilities
+  attr_accessor :session_id, :capabilities, :desired_capabilities
   attr_reader :base_url
 
   BASE_URL = 'http://localhost:8100'
 
-  def initialize(caps:, base_url: BASE_URL)
-    valid_caps(caps)
-    @capabilities = caps
+  def initialize(desired_capabilities:, base_url: BASE_URL)
+    @desired_capabilities = parse(desired_capabilities)
     @base_url = base_url
+    @capabilities = nil
     @session_id = nil
   end
 
@@ -34,10 +34,14 @@ class WdaClient
     req
   end
 
-  def valid_caps(caps)
+  private
+
+  def parse(caps)
     parsed_caps = JSON.parse(caps)
     raise ArgumentError, "should caps has desiredCapabilities" if parsed_caps["desiredCapabilities"].nil?
     raise ArgumentError, "should caps has bundleId" if parsed_caps["desiredCapabilities"]["bundleId"].nil?
     raise ArgumentError, "should caps has app" if parsed_caps["desiredCapabilities"]["app"].nil?
+
+    parsed_caps
   end
 end

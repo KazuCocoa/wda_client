@@ -39,9 +39,10 @@ class WdaClient::StatusTest < Minitest::Test
       .with(headers:{ 'Content-Type' => 'application/json' })
       .to_return(body: json)
 
-    client = ::WdaClient.new caps: caps
+    client = ::WdaClient.new desired_capabilities: caps
     res_json_body = client.get_status
 
     assert_equal JSON.parse(json), res_json_body
+    assert_equal JSON.parse(caps), client.desired_capabilities
   end
 end

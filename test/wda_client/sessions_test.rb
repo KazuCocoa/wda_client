@@ -22,6 +22,15 @@ class WdaClient::SessionsTest < Minitest::Test
 }
     EXPECTED_JSON
 
+    expected_caps =<<-EXPECTED_CAPS
+{
+  "device" : "iphone",
+  "browserName" : "My App",
+  "sdkVersion" : "9.3",
+  "CFBundleIdentifier" : "com.kazucocoa"
+}
+    EXPECTED_CAPS
+
     caps =<<-CAPS
 {
   "desiredCapabilities": {
@@ -35,10 +44,12 @@ class WdaClient::SessionsTest < Minitest::Test
       .with(headers:{ 'Content-Type' => 'application/json' })
       .to_return(body: json)
 
-    client = ::WdaClient.new caps: caps
+    client = ::WdaClient.new desired_capabilities: caps
     res_json_body = client.install
 
     assert_equal JSON.parse(json), res_json_body
     assert_equal "26FA8CEA-9D59-4EB1-8B19-84AFD7307936", client.session_id
+    assert_equal JSON.parse(expected_caps), client.capabilities
+    assert_equal JSON.parse(caps), client.desired_capabilities
   end
 end
