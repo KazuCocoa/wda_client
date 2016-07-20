@@ -1,10 +1,12 @@
 require 'wda_client/version'
 require 'wda_client/status'
 require 'wda_client/sessions'
+require 'wda_client/screenshot'
 
 class WdaClient
   include ::WdaClient::Status
   include ::WdaClient::Sessions
+  include ::WdaClient::Screenshot
 
   attr_accessor :session_id, :capabilities, :desired_capabilities
   attr_reader :base_url
