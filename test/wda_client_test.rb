@@ -31,7 +31,7 @@ class WdaClientTest < Minitest::Test
   }
 }
     CAPS
-    assert_raises(ArgumentError, "should caps has app") { ::WdaClient.new(desired_capabilities: caps) }
+    assert ::WdaClient.new(desired_capabilities: caps)
   end
 
   def test_generate_url

@@ -7,9 +7,7 @@ class WdaClient
       req = generate_base_req(method: "post", url_path: "/session")
       req.body = @desired_capabilities
 
-      res = Net::HTTP.start(uri.host, uri.port) do |http|
-        http.request(req)
-      end
+      res = Net::HTTP.start(uri.host, uri.port) { |http| http.request(req) }
 
       result = JSON.parse(res.body)
       @session_id = result["sessionId"] || result["value"]["sessionId"]
