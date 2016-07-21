@@ -7,8 +7,8 @@ class WdaClient::ScreenshotTest < Minitest::Test
     base_host = 'localhost:8100'
 
     json =<<-EXPECTED_JSON
-  {
-  }
+{
+}
     EXPECTED_JSON
 
     caps =<<-CAPS
