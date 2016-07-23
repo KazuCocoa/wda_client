@@ -2,6 +2,8 @@
 
 WdaClient is my minimal client for WebDriverAgent.
 
+[![Build Status](https://travis-ci.org/KazuCocoa/wda_client.svg?branch=master)](https://travis-ci.org/KazuCocoa/wda_client)
+
 ## Installation
 
 Add this line to your application's Gemfile:
