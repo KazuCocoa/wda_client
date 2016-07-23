@@ -1,11 +1,11 @@
-require "test_helper"
+require 'test_helper'
 require 'webmock/minitest'
 require 'json'
 
 class WdaClient::ScreenshotTest < Minitest::Test
   def test_take_screenshot
     base_host = 'localhost:8100'
-    test_file = "./test/data/sample_screen.png"
+    test_file = './test/data/sample_screen.png'
 
     json =<<-EXPECTED_JSON
 {
@@ -29,7 +29,7 @@ class WdaClient::ScreenshotTest < Minitest::Test
       .to_return(body: json)
 
     expected_result = JSON.parse(json)
-    expected_result["output"] = "./test/data/sample_screen.png"
+    expected_result['output'] = './test/data/sample_screen.png'
 
     client = ::WdaClient.new desired_capabilities: caps
     res_json_body = client.take_screenshot(to_file: test_file)

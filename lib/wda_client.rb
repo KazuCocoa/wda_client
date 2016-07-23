@@ -45,8 +45,8 @@ class WdaClient
 
   def parse(caps)
     parsed_caps = JSON.parse(caps)
-    raise ArgumentError, "should caps has desiredCapabilities" if parsed_caps["desiredCapabilities"].nil?
-    raise ArgumentError, "should caps has bundleId" if parsed_caps["desiredCapabilities"]["bundleId"].nil?
+    raise ArgumentError, 'should caps has desiredCapabilities' if parsed_caps['desiredCapabilities'].nil?
+    raise ArgumentError, 'should caps has bundleId' if parsed_caps['desiredCapabilities']['bundleId'].nil?
 
     parsed_caps
   end
