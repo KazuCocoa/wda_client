@@ -1,8 +1,11 @@
-require 'wda_client/version'
-require 'wda_client/status'
-require 'wda_client/sessions'
-require 'wda_client/screenshot'
-require 'wda_client/source'
+require 'uri'
+require 'net/http'
+
+require_relative 'wda_client/version'
+require_relative 'wda_client/status'
+require_relative 'wda_client/sessions'
+require_relative 'wda_client/screenshot'
+require_relative 'wda_client/source'
 
 class WdaClient
   include ::WdaClient::Status
