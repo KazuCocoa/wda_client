@@ -8,6 +8,10 @@ class WdaClient::ScreenshotTest < Minitest::Test
 
     json =<<-EXPECTED_JSON
 {
+  "value": "",
+  "sessionId": "nil",
+  "status": 0,
+  "output": "./snapshot.png"
 }
     EXPECTED_JSON
 
