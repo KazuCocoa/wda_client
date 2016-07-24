@@ -101,6 +101,4 @@ class WdaClient::SessionsTest < Minitest::Test
     assert_equal JSON.parse(expected_caps), client.capabilities
     assert_equal JSON.parse(caps), client.desired_capabilities
   end
-
-
 end

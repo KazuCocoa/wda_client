@@ -6,12 +6,14 @@ require_relative 'wda_client/status'
 require_relative 'wda_client/sessions'
 require_relative 'wda_client/screenshot'
 require_relative 'wda_client/source'
+require_relative 'wda_client/homescreen'
 
 class WdaClient
   include ::WdaClient::Status
   include ::WdaClient::Sessions
   include ::WdaClient::Screenshot
   include ::WdaClient::Source
+  include ::WdaClient::Homescreen
 
   attr_accessor :session_id, :capabilities, :desired_capabilities
   attr_reader :base_url
