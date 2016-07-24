@@ -1,4 +1,4 @@
-# v0.1.1
+# v0.2.0
 - Add support API
     - get session
     - close session
