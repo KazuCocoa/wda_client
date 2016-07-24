@@ -35,6 +35,8 @@ class WdaClient
             Net::HTTP::Get.new(url_path)
           when 'post'
             Net::HTTP::Post.new(url_path)
+          else
+            # no method
           end
     req['Content-Type'] = 'application/json'
 
