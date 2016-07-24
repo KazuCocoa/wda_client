@@ -7,7 +7,10 @@ class WdaClient
 
       res = Net::HTTP.start(@base_url.host, @base_url.port) { |http| http.request(req) }
 
-      JSON.parse res.body
+      result = JSON.parse res.body
+      @status = result['status']
+
+      result
     end
   end
 end

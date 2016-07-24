@@ -33,9 +33,10 @@ Or install it yourself as:
 $ pry
 > require 'wda_client'
 > client = WdaClient.new desired_capabilities: "{\"desiredCapabilities\":{\"bundleId\": \"com.my.app\"}}"
-> client.get_status # get https://github.com/facebook/WebDriverAgent/wiki/Queries#checking-service-status
+> client.get_status      # https://github.com/facebook/WebDriverAgent/wiki/Queries#checking-service-status
 > client.take_screenshot # https://github.com/facebook/WebDriverAgent/wiki/Queries#get-a-screenshot
-> client.get_source # https://github.com/facebook/WebDriverAgent/wiki/Queries#source-aka-tree
+> client.get_source      # https://github.com/facebook/WebDriverAgent/wiki/Queries#source-aka-tree
+> client.close           # close session
 ```
 
 ## Advanced

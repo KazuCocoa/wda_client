@@ -8,21 +8,21 @@ class WdaClient::StatusTest < Minitest::Test
 
     json =<<-EXPECTED_JSON
 {
-"value" : {
-  "state" : "success",
-  "os" : {
-    "name" : "iPhone OS",
-    "version" : "9.3"
+  "value" : {
+    "state" : "success",
+    "os" : {
+      "name" : "iPhone OS",
+      "version" : "9.3"
+    },
+    "ios" : {
+      "simulatorVersion" : "9.3"
+    },
+    "build" : {
+      "time" : "Jul 18 2016 17:28:56"
+    }
   },
-  "ios" : {
-    "simulatorVersion" : "9.3"
-  },
-  "build" : {
-    "time" : "Jul 18 2016 17:28:56"
-  }
-},
-"sessionId" : null,
-"status" : 0
+  "sessionId" : null,
+  "status" : 0
 }
     EXPECTED_JSON
 
@@ -44,5 +44,6 @@ class WdaClient::StatusTest < Minitest::Test
 
     assert_equal JSON.parse(json), res_json_body
     assert_equal JSON.parse(caps), client.desired_capabilities
+    assert_equal 0, client.status
   end
 end

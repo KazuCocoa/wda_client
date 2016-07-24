@@ -133,15 +133,6 @@ class WdaClient::SessionsTest < Minitest::Test
 }
     EXPECTED_JSON
 
-    expected_caps =<<-EXPECTED_CAPS
-{
-  "device" : "iphone",
-  "browserName" : "My App",
-  "sdkVersion" : "9.3",
-  "CFBundleIdentifier" : "com.kazucocoa"
-}
-    EXPECTED_CAPS
-
     caps =<<-CAPS
 {
   "desiredCapabilities": {
@@ -166,5 +157,33 @@ class WdaClient::SessionsTest < Minitest::Test
     assert_equal JSON.parse(json_delete), res_json_body
     assert_equal nil, client.session_id
     assert_equal 0, client.status
+  end
+
+  def test_error_delete_session_because_alredy_closed
+    base_host = 'localhost:8100'
+
+    json_delete =<<-EXPECTED_JSON
+{
+  "value" : "Session does not exist",
+  "sessionId" : null,
+  "status" : 6
+}
+    EXPECTED_JSON
+
+    caps =<<-CAPS
+{
+  "desiredCapabilities": {
+    "bundleId": "com.kazucocoa"
+  }
+}
+    CAPS
+
+    stub_request(:delete, "#{base_host}/session/")
+      .with(headers:{ 'Content-Type' => 'application/json' })
+      .to_return(body: json_delete)
+
+    client = ::WdaClient.new desired_capabilities: caps
+    res_json_body = client.close
+    assert_equal JSON.parse(json_delete), res_json_body
   end
 end
