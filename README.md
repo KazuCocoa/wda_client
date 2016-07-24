@@ -28,8 +28,6 @@ Or install it yourself as:
 
 1. Launch WebDriverAgent
     - Read [official document](https://github.com/facebook/WebDriverAgent)
-    - https://github.com/facebook/WebDriverAgent/blob/4addbcd4a3d9e5ec6241ac4ad3830227f2f4ccd4/WebDriverAgentLib/Utilities/FBConfiguration.m#L36
-    - https://github.com/facebook/WebDriverAgent/blob/9a488a2f86333d9f4e7619109e6f0e838948fe5c/WebDriverAgentTests/UnitTests/FBConfigurationTests.m#L23
 2. load this module and create instance
 ```
 $ pry
@@ -55,12 +53,13 @@ $ pry
 client = WdaClient.new desired_capabilities: "{\"desiredCapabilities\":{\"bundleId\": \"com.my.app\"}}", base_url: 'http://localhost:4100'
 ```
 
+## Current Status
+
+- Get Status / Get source / go to homescreen / Take Screenshot / install app and get session id
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/wda_client. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-## Current Status
-- Get Status / Get source / go to homescreen / Take Screenshot / install app and get session id
 
 ## License
 
