@@ -1,6 +1,6 @@
 # WdaClient
 
-WdaClient is my minimal client for WebDriverAgent.
+WdaClient is my minimal client for WebDriverAgent to help some operations.
 
 [![Build Status](https://travis-ci.org/KazuCocoa/wda_client.svg?branch=master)](https://travis-ci.org/KazuCocoa/wda_client)
 
@@ -20,20 +20,47 @@ Or install it yourself as:
 
     $ gem install wda_client
 
+### Requirement
+- Should use WebDriverAgent over the below commit hash because `/source` supported from it.
+    - https://github.com/facebook/WebDriverAgent/commit/9648eb1747ef7c64630d78256f82e675742f8431
+
 ## Usage
 
-TODO: Write usage instructions here
+1. Launch WebDriverAgent
+    - Read [official document](https://github.com/facebook/WebDriverAgent)
+    - https://github.com/facebook/WebDriverAgent/blob/4addbcd4a3d9e5ec6241ac4ad3830227f2f4ccd4/WebDriverAgentLib/Utilities/FBConfiguration.m#L36
+    - https://github.com/facebook/WebDriverAgent/blob/9a488a2f86333d9f4e7619109e6f0e838948fe5c/WebDriverAgentTests/UnitTests/FBConfigurationTests.m#L23
+2. load this module and create instance
+```
+$ pry
+> require 'wda_client'
+> client = WdaClient.new desired_capabilities: "{\"desiredCapabilities\":{\"bundleId\": \"com.my.app\"}}"
+> client.get_status # get https://github.com/facebook/WebDriverAgent/wiki/Queries#checking-service-status
+> client.take_screenshot # https://github.com/facebook/WebDriverAgent/wiki/Queries#get-a-screenshot
+> client.get_source # https://github.com/facebook/WebDriverAgent/wiki/Queries#source-aka-tree
+```
 
-## Development
+## Advanced
+1. Launch WebDriverAgent with particular port number
+    1. launch with `fbsimctl` with particular port number
+        - https://github.com/facebook/WebDriverAgent/wiki/Starting-WebDriverAgent
+    2. change source code directly
+        - [code](https://github.com/facebook/WebDriverAgent/blob/4addbcd4a3d9e5ec6241ac4ad3830227f2f4ccd4/WebDriverAgentLib/Utilities/FBConfiguration.m#L16)
+    3. provide port number via environment of `USE_PORT`
+        - [code](https://github.com/facebook/WebDriverAgent/blob/4addbcd4a3d9e5ec6241ac4ad3830227f2f4ccd4/WebDriverAgentLib/Utilities/FBConfiguration.m#L36)
+2. Generate instance of `WdaClient` with `base_url`.
+- Set port `4100`, for insrance.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+client = WdaClient.new desired_capabilities: "{\"desiredCapabilities\":{\"bundleId\": \"com.my.app\"}}", base_url: 'http://localhost:4100'
+```
 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/wda_client. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
+## Current Status
+- Get Status / Get source / go to homescreen / Take Screenshot / install app and get session id
 
 ## License
 
