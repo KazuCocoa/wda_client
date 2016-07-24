@@ -51,6 +51,7 @@ class WdaClient::SessionsTest < Minitest::Test
     assert_equal "26FA8CEA-9D59-4EB1-8B19-84AFD7307936", client.session_id
     assert_equal JSON.parse(expected_caps), client.capabilities
     assert_equal JSON.parse(caps), client.desired_capabilities
+    assert_equal 0, client.status
   end
 
   def test_get_session_without_app
@@ -100,6 +101,7 @@ class WdaClient::SessionsTest < Minitest::Test
     assert_equal "26FA8CEA-9D59-4EB1-8B19-84AFD7307936", client.session_id
     assert_equal JSON.parse(expected_caps), client.capabilities
     assert_equal JSON.parse(caps), client.desired_capabilities
+    assert_equal 0, client.status
   end
 
   def test_delete_session
@@ -163,5 +165,6 @@ class WdaClient::SessionsTest < Minitest::Test
     res_json_body = client.close
     assert_equal JSON.parse(json_delete), res_json_body
     assert_equal nil, client.session_id
+    assert_equal 0, client.status
   end
 end
