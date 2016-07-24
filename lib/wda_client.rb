@@ -30,11 +30,11 @@ class WdaClient
 
   def generate_base_req(method:, url_path:)
     req = case method
-          when 'get'
+          when :get
             Net::HTTP::Get.new(url_path)
-          when 'post'
+          when :post
             Net::HTTP::Post.new(url_path)
-          when 'delete'
+          when :delete
             Net::HTTP::Delete.new(url_path)
           else
             # no method
