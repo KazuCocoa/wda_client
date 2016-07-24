@@ -15,7 +15,7 @@ class WdaClient
   include ::WdaClient::Source
   include ::WdaClient::Homescreen
 
-  attr_accessor :session_id, :capabilities, :desired_capabilities
+  attr_accessor :session_id, :capabilities, :desired_capabilities, :status
   attr_reader :base_url
 
   BASE_URL = 'http://localhost:8100'
@@ -25,6 +25,7 @@ class WdaClient
     @base_url = base_url
     @capabilities = nil
     @session_id = nil
+    @status = 0
   end
 
   def generate_uri(url_path:)
@@ -37,6 +38,8 @@ class WdaClient
             Net::HTTP::Get.new(url_path)
           when 'post'
             Net::HTTP::Post.new(url_path)
+          when 'delete'
+            Net::HTTP::Delete.new(url_path)
           else
             # no method
           end
