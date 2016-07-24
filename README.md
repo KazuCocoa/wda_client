@@ -56,7 +56,13 @@ client = WdaClient.new desired_capabilities: "{\"desiredCapabilities\":{\"bundle
 
 ## Current Status
 
-- Get Status / Get source / go to homescreen / Take Screenshot / install app and get session id
+- Get Status
+- Get source
+- go to homescreen
+- Take Screenshot
+- install app and get session id
+- get current session id
+- close current session
 
 ## Contributing
 
