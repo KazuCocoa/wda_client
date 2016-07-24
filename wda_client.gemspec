@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Kazuaki MATSUO"]
   spec.email         = ["fly.49.89.over@gmail.com"]
 
-  spec.summary       = %q{minimal client for WebDriverAgent}
-  spec.description   = %q{minimal client for WebDriverAgent}
+  spec.summary       = %q{minimal client for WebDriverAgent to help some operations}
+  spec.description   = %q{minimal client for WebDriverAgent to help some operations}
   spec.homepage      = "https://github.com/KazuCocoa/wda_client"
   spec.license       = "MIT"
 
